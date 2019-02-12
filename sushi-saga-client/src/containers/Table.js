@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react'
 
 class Table extends React.Component {
-  state = {
-    wallet: 200
-  }
 
 renderPlates = (array) => {
     return array.map((x, index) => {
@@ -11,21 +8,10 @@ renderPlates = (array) => {
     })
   }
 
-
-  sushiBill = () =>{
-    debugger
-    const bill = 0
-    if(!this.props.eatenSushis){
-      this.props.eatenSushis.map(sushi => sushi.price + bill)
-    } else {
-      null
-    }
-  }
-
   render(){
     return(<Fragment>
       <h1 className="remaining">
-        You have: ${this.state.wallet} remaining!
+        You have: ${this.props.wallet} remaining!
       </h1>
       <div className="table">
         <div className="stack">

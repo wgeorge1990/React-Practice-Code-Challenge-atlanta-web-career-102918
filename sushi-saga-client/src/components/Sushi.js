@@ -6,11 +6,16 @@ class Sushi extends React.Component {
   }
 
   eatSushi = (e) => {
-    this.setState({
+
+    if(!this.state.eaten && this.props.wallet >= this.props.sushi.price) {this.setState({
       eaten: !this.state.eaten
     })
+    this.props.eatSushi(e, this.props.sushi);
+    this.props.remainingMoney(e, this.props.sushi);
+  } else {
+    null
+  }
 
-    this.props.eatSushi(e, this.props.id)
 
   }
 

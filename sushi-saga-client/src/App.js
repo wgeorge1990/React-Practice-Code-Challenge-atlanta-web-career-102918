@@ -8,7 +8,8 @@ const API = "http://localhost:3000/sushis"
 class App extends Component {
   state = {
       sushis: [],
-      eatenSushis: []
+      eatenSushis: [],
+      wallet: 200
   }
 
 
@@ -23,24 +24,43 @@ componentDidMount() {
   this.fetchSushi()
 }
 
-eatSushi = (e) => {
+eatSushi = (e, sushi) => {
+console.log(sushi)
 
-console.log(this)
-  this.setState({
-    eatenSushis: this.state.eatenSushis.concat(this.sushi)
-  })
+  if (this.state.wallet >0) {this.setState({
+    eatenSushis: this.state.eatenSushis.concat(sushi)
+  })}
+  else{
+    null
+  }
 }
 
+remainingMoney = (e, sushi) => {
+  console.log("inside sushi bill", sushi, this.state.wallet, sushi.price)
+
+
+  if(this.state.wallet > 0) {
+    this.setState({
+    wallet: this.state.wallet - sushi.price
+  })
+} else {
+  null
+}
+
+
+}
 
   render() {
     return (
       <div className="app">
         <SushiContainer
+          wallet={this.state.wallet}
+          remainingMoney={this.remainingMoney}
           eatSushi={this.eatSushi}
           sushis={this.state.sushis}
           eaten={this.state.eaten}
           />
-        <Table eatenSushis={this.state.eatenSushis}/>
+        <Table eatenSushis={this.state.eatenSushis} wallet={this.state.wallet}/>
       </div>
     );
   }

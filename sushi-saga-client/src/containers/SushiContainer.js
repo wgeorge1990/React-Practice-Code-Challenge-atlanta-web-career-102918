@@ -44,6 +44,8 @@ class SushiContainer extends React.Component {
             {
                chunk.map((sushi) =>
               <Sushi
+              wallet={this.props.wallet}
+              remainingMoney={this.props.remainingMoney}
               sushi={sushi}
               key={sushi.id}
               eaten={this.props.eaten}
